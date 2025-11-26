@@ -58,6 +58,18 @@
                     opacity: 0;
                 }
             }
+            /* 弹窗样式 */
+            .modal-overlay {
+                backdrop-filter: blur(8px);
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
+            .modal-content {
+                transform: scale(0.95);
+                transition: transform 0.3s ease;
+            }
+            .modal-active .modal-content {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
@@ -72,6 +84,30 @@
 
     <!-- 歌词飘落容器 -->
     <div id="lyrics-container" class="fixed inset-0 z-10 pointer-events-none"></div>
+
+    <!-- 微信二维码弹窗 -->
+    <div id="wechatModal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/70 opacity-0 invisible">
+        <div class="modal-content glass-card rounded-2xl p-8 max-w-sm w-full">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-white">扫码加微信 · 音乐同好集结</h3>
+                <button id="closeModal" class="text-white/70 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="flex flex-col items-center">
+                <!-- 微信二维码图片 -->
+                <div class="w-64 h-64 bg-white p-3 rounded-lg mb-5 shadow-xl">
+                    <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/4dacc2e4604544b9aa703e7352014182.jpg~tplv-a9rns2rl98-24:720:720.png?rcl=20251126164026A34C69842E073E35F6A7&rk3s=8e244e95&rrcfp=8a172a1a&x-expires=1764751227&x-signature=Vezcv4UFQsd0d7OhalK1LiG6SNI%3D" 
+                         alt="微信二维码" 
+                         class="w-full h-full object-contain">
+                </div>
+                <p class="text-white/80 text-center mb-2">现场组队 · 歌单分享 · 音乐闲聊</p>
+                <span class="inline-block px-3 py-1 bg-rock/20 text-rock text-xs rounded-full border border-rock/30">
+                    备注：音乐同好
+                </span>
+            </div>
+        </div>
+    </div>
 
     <!-- 主内容 -->
     <div class="relative z-20 container mx-auto px-4 py-16 flex flex-col items-center min-h-screen">
@@ -130,22 +166,21 @@
                     </div>
                     <span class="text-xs text-center text-white/80">抖音</span>
                 </a>
-                <!-- 微信 -->
-                <a href="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/4dacc2e4604544b9aa703e7352014182.jpg~tplv-a9rns2rl98-24:720:720.png?rcl=20251126164026A34C69842E073E35F6A7&rk3s=8e244e95&rrcfp=8a172a1a&x-expires=1764751227&x-signature=Vezcv4UFQsd0d7OhalK1LiG6SNI%3D" 
-                   target="_blank" 
-                   class="flex flex-col items-center p-2 rounded-lg hover:bg-white/5 transition-all group">
+               <!-- 微信（弹窗） -->
+                <button id="wechatBtn" 
+                        class="flex flex-col items-center p-2 rounded-lg hover:bg-white/5 transition-all group cursor-pointer">
                     <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                         <i class="fa fa-weixin text-white text-xl"></i>
                     </div>
                     <span class="text-xs text-center text-white/80">微信</span>
-                </a>
+                </button>
                 <!-- 网易云音乐 -->
                 <a href="https://y.music.163.com/m/user?id=1788051609&dlt=0846&app_version=9.4.15" 
                    target="_blank" 
                    class="flex flex-col items-center p-2 rounded-lg hover:bg-white/5 transition-all group">
                     <div class="w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                         <img src="https://img2.baidu.com/it/u=1459815148,725856451&fm=253&app=138&f=JPEG?w=500&h=500" 
-                             alt="" 
+                             alt="网易云logo" 
                              class="w-7 h-7 object-contain">
                     </div>
                     <span class="text-xs text-center text-white/80">网易云</span>
@@ -191,8 +226,40 @@
         </div>
     </div>
 
-    <!-- 歌词飘落脚本 -->
+    <!-- 交互脚本（微信弹窗+歌词飘落） -->
     <script>
+        // 微信弹窗控制
+        const wechatBtn = document.getElementById('wechatBtn');
+        const wechatModal = document.getElementById('wechatModal');
+        const closeModal = document.getElementById('closeModal');
+
+        // 打开弹窗
+        wechatBtn.addEventListener('click', () => {
+            wechatModal.classList.remove('invisible', 'opacity-0');
+            wechatModal.classList.add('modal-active');
+            document.body.style.overflow = 'hidden'; // 禁止背景滚动
+        });
+
+        // 关闭弹窗函数
+        const closeModalFunc = () => {
+            wechatModal.classList.remove('modal-active');
+            setTimeout(() => {
+                wechatModal.classList.add('invisible', 'opacity-0');
+                document.body.style.overflow = ''; // 恢复背景滚动
+            }, 300);
+        };
+
+        // 关闭弹窗事件绑定
+        closeModal.addEventListener('click', closeModalFunc);
+        wechatModal.addEventListener('click', (e) => {
+            if (e.target === wechatModal) closeModalFunc(); // 点击外部关闭
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !wechatModal.classList.contains('invisible')) {
+                closeModalFunc(); // ESC键关闭
+            }
+        });
+
         // 赵雷歌词库（20句）
         const zhaoLeiLyrics = [
             "理想今年你几岁，你总是诱惑着年轻的朋友",
@@ -245,7 +312,7 @@
             }, (duration + delay) * 1000);
         }
 
-        // 初始化+循环生成
+        // 初始化+循环生成歌词
         window.addEventListener('load', () => {
             // 初始生成3句
             for(let i=0; i<3; i++) {
