@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>桃叔· 一生都在装逼的男人</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rock: '#FF3D00',
+                        folk: '#2979FF',
+                        dark: '#121212',
+                        glass: 'rgba(255,255,255,0.08)',
+                    },
+                    fontFamily: {
+                        music: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-stroke {
+                -webkit-text-stroke: 0.5px rgba(255,255,255,0.3);
+            }
+            .glass-card {
+                background: rgba(255,255,255,0.08);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255,255,255,0.12);
+            }
+            .lyrics-fall {
+                position: absolute;
+                color: rgba(255,255,255,0.7);
+                font-size: clamp(14px, 2vw, 18px);
+                pointer-events: none;
+                white-space: nowrap;
+                animation: fall linear infinite;
+                opacity: 0;
+            }
+            @keyframes fall {
+                0% { 
+                    transform: translateY(-100px);
+                    opacity: 0;
+                }
+                10% { 
+                    opacity: 0.8;
+                }
+                90% { 
+                    opacity: 0.8;
+                }
+                100% { 
+                    transform: translateY(100vh);
+                    opacity: 0;
+                }
+            }
+        }
+    </style>
+</head>
+<body class="bg-dark text-white min-h-screen overflow-x-hidden font-music">
+    <!-- 背景层 -->
+    <div class="fixed inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-rock/20 via-folk/10 to-dark"></div>
+        <img src="https://p26-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1978451018220699654~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1779705469&x-signature=mR%2BIF1697tl5p%2BkUw0cJJqeRAeA%3D" 
+             alt="音乐现场背景" 
+             class="w-full h-full object-cover opacity-20">
+    </div>
+
+    <!-- 歌词飘落容器 -->
+    <div id="lyrics-container" class="fixed inset-0 z-10 pointer-events-none"></div>
+
+    <!-- 主内容 -->
+    <div class="relative z-20 container mx-auto px-4 py-16 flex flex-col items-center min-h-screen">
+        <!-- 头像与标题区 -->
+        <div class="text-center mb-10">
+            <div class="relative inline-block mb-4">
+                <div class="w-44 h-44 rounded-full overflow-hidden border-4 border-rock/60 shadow-xl shadow-rock/20">
+                    <img src="https://p26-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/03d966e82f99445a98d6a39f3e2fe5bf.jpg~tplv-a9rns2rl98-24:720:720.image?rcl=20251126183726C3DDB34FB44DD3EF87A8&rk3s=8e244e95&rrcfp=8a172a1a&x-expires=1764758247&x-signature=%2B1bAIBe5bHOEeXxnYc7nwS3m5Bw%3D" 
+                         alt="桃叔Live现场" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="absolute -bottom-3 -right-3 bg-rock text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg">
+                    <i class="fa fa-guitar text-2xl"></i>
+                </div>
+            </div>
+            <h1 class="text-5xl font-bold mb-2 text-stroke">桃叔</h1>
+            <p class="text-2xl text-folk/90 italic mb-6">"理想永远都年轻"</p>
+            
+            <!-- 音乐标签 -->
+            <div class="flex flex-wrap justify-center gap-3 mb-4">
+                <span class="px-4 py-2 rounded-full bg-rock/20 text-rock text-sm border border-rock/30">摇滚乐迷</span>
+                <span class="px-4 py-2 rounded-full bg-folk/20 text-folk text-sm border border-folk/30">民谣中毒</span>
+                <span class="px-4 py-2 rounded-full bg-amber-500/20 text-amber-400 text-sm border border-amber-500/30">赵雷乐迷</span>
+                <span class="px-4 py-2 rounded-full bg-purple-500/20 text-purple-400 text-sm border border-purple-500/30">Live现场控</span>
+            </div>
+        </div>
+
+        <!-- 个人介绍 -->
+        <div class="glass-card rounded-2xl p-6 mb-10 w-full max-w-md text-center">
+            <p class="text-lg leading-relaxed">
+                沉迷<span class="text-rock font-bold">Live现场</span>的震颤，是<span class="text-folk font-bold">民谣</span>里的情绪囚徒，更是<span class="text-amber-400 font-bold">赵雷</span>的无法长大。<br>
+                不爱工位的格子间，只爱舞台下的人潮与鼓点——<br>
+                音乐是生活的riff，现场是灵魂的返场。
+            </p>
+        </div>
+
+        <!-- 社交账号区 -->
+        <div class="glass-card rounded-2xl p-6 mb-10 w-full max-w-md">
+            <h2 class="text-xl font-semibold mb-5 text-center border-b border-white/10 pb-3">社交信号站</h2>
+            <div class="grid grid-cols-4 gap-3">
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/zhm030216?igsh=NTc4MTIwNjQ2YQ==" 
+                   target="_blank" 
+                   class="flex flex-col items-center p-2 rounded-lg hover:bg-white/5 transition-all group">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-orange-500 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa fa-instagram text-white text-xl"></i>
+                    </div>
+                    <span class="text-xs text-center text-white/80">Ins</span>
+                </a>
+                <!-- 抖音 -->
+                <a href="https://v.douyin.com/PM1kdDvps_U/" 
+                   target="_blank" 
+                   class="flex flex-col items-center p-2 rounded-lg hover:bg-white/5 transition-all group">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-yellow-500 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa fa-music text-white text-xl"></i>
+                    </div>
+                    <span class="text-xs text-center text-white/80">抖音</span>
+                </a>
+                <!-- 微信 -->
+                <a href="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/4dacc2e4604544b9aa703e7352014182.jpg~tplv-a9rns2rl98-24:720:720.png?rcl=20251126164026A34C69842E073E35F6A7&rk3s=8e244e95&rrcfp=8a172a1a&x-expires=1764751227&x-signature=Vezcv4UFQsd0d7OhalK1LiG6SNI%3D" 
+                   target="_blank" 
+                   class="flex flex-col items-center p-2 rounded-lg hover:bg-white/5 transition-all group">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa fa-weixin text-white text-xl"></i>
+                    </div>
+                    <span class="text-xs text-center text-white/80">微信</span>
+                </a>
+                <!-- 网易云音乐 -->
+                <a href="https://y.music.163.com/m/user?id=1788051609&dlt=0846&app_version=9.4.15" 
+                   target="_blank" 
+                   class="flex flex-col items-center p-2 rounded-lg hover:bg-white/5 transition-all group">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <img src="https://img2.baidu.com/it/u=1459815148,725856451&fm=253&app=138&f=JPEG?w=500&h=500" 
+                             alt="" 
+                             class="w-7 h-7 object-contain">
+                    </div>
+                    <span class="text-xs text-center text-white/80">网易云</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 近期歌单区 -->
+        <div class="glass-card rounded-2xl p-6 w-full max-w-md">
+            <h2 class="text-xl font-semibold mb-5 text-center border-b border-white/10 pb-3">耳机里的现场</h2>
+            <div class="space-y-4">
+                <!-- 理想 - 赵雷 -->
+                <a href="https://163cn.tv/VLTjhhe" 
+                   target="_blank" 
+                   class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-all">
+                    <div class="w-16 h-16 rounded-md overflow-hidden flex-shrink-0 shadow-md border border-folk/30">
+                        <img src="https://p26-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/fa5d0c5b832140719c09c0f687feda9e.jpg~tplv-a9rns2rl98-24:720:720.image?rcl=20251126173710FACDAAA0418F8F51F3E8&rk3s=8e244e95&rrcfp=8a172a1a&x-expires=1764754630&x-signature=G2lsc1gjNoLiMw9PfEVNjwqs0qA%3D" 
+                             alt="理想" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="font-medium text-white">《理想》</h3>
+                        <p class="text-sm text-folk/80">赵雷 · 民谣</p>	
+                    </div>
+                    <i class="fa fa-play-circle text-rock text-xl"></i>
+                </a>
+                <!-- 狗都不听的歌单 -->
+                <a href="https://163cn.tv/VLzARbK" 
+                   target="_blank" 
+                   class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-all">
+                    <div class="w-16 h-16 rounded-md overflow-hidden flex-shrink-0 shadow-md border border-rock/30">
+                        <img src="https://p26-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/cd66f88d0eab4f848d8d29e0854c60b3.png~tplv-a9rns2rl98-24:720:720.png?rcl=202511261717564C1457E60F9601EF98B7&rk3s=8e244e95&rrcfp=8a172a1a&x-expires=1764753476&x-signature=eWzzReilK%2FnKgjGbN28OwapIF78%3D" 
+                             alt="狗都不听的歌单" 
+                             class="w-full h-full object-cover bg-white">
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="font-medium text-white">《狗都不听的歌单》</h3>
+                        <p class="text-sm text-rock/80">摇滚现场集</p>
+                    </div>
+                    <i class="fa fa-volume-up text-folk text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 歌词飘落脚本 -->
+    <script>
+        // 赵雷歌词库（20句）
+        const zhaoLeiLyrics = [
+            "理想今年你几岁，你总是诱惑着年轻的朋友",
+            "和我在成都的街头走一走，直到所有的灯都熄灭了也不停留",
+            "南方姑娘，你是否习惯北方的秋凉",
+            "理想永远都年轻，你让我倔强地反抗着命运",
+            "又一个四季在轮回，而我一无所获的坐在街头",
+            "只有理想在支撑着那些麻木的血肉",
+            "阳光之中，到处可见奔忙的人们",
+            "为寂寞的夜空画上一个月亮，把我画在月亮下面歌唱",
+            "少年时光，情窦初开的我从不敢和你说",
+            "晴朗蓝天下，昂头的笑脸，爱很简单",
+            "我记得这里是片树林，后面有个山坡，山坡上的枣树每当秋天到来",
+            "妈妈说你要听话，不要整天想那些没用的",
+            "我从南方来，你到北方去，我们都在寻找着生活的意义",
+            "城市的夜晚霓虹灯璀璨，点亮了黑暗却赶不走孤单",
+            "我们都在时光的洪流里，被推着向前走",
+            "青春是段跌跌撞撞的旅行，拥有着后知后觉的美丽",
+            "那些曾经的誓言，像散落的星，在回忆里闪着光",
+            "我想在你眼里撒野奔跑，我想一个眼神就到老",
+            "我们笑着说再见，却深知再见遥遥无期",
+            "生活不止眼前的苟且，还有诗和远方的田野"
+        ];
+
+        // 创建飘落歌词
+        function createLyric() {
+            const container = document.getElementById('lyrics-container');
+            const lyricEl = document.createElement('div');
+            lyricEl.className = 'lyrics-fall';
+            
+            // 随机选歌词
+            lyricEl.textContent = zhaoLeiLyrics[Math.floor(Math.random() * zhaoLeiLyrics.length)];
+            
+            // 随机样式
+            const left = Math.random() * 90;
+            const duration = 18 + Math.random() * 22;
+            const delay = Math.random() * 5;
+            const color = ['rgba(255,61,0,0.8)', 'rgba(41,121,255,0.8)', 'rgba(255,255,255,0.7)'][Math.floor(Math.random()*3)];
+            
+            lyricEl.style.left = `${left}%`;
+            lyricEl.style.animationDuration = `${duration}s`;
+            lyricEl.style.animationDelay = `${delay}s`;
+            lyricEl.style.color = color;
+            
+            container.appendChild(lyricEl);
+            
+            // 动画结束后移除
+            setTimeout(() => {
+                lyricEl.remove();
+            }, (duration + delay) * 1000);
+        }
+
+        // 初始化+循环生成
+        window.addEventListener('load', () => {
+            // 初始生成3句
+            for(let i=0; i<3; i++) {
+                setTimeout(createLyric, i * 1500);
+            }
+            // 每2秒生成一句
+            setInterval(createLyric, 2000);
+        });
+    </script>
+</body>
+</html>
